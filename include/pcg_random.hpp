@@ -1205,7 +1205,11 @@ public:
         return baseclass::period_pow2() + table_size*extvalclass::period_pow2();
     }
 
+#ifdef _MSC_VER
+	__forceinline result_type operator()()
+#else
     __attribute__((always_inline)) result_type operator()()
+#endif
     {
         result_type rhs = get_extended_value();
         result_type lhs = this->baseclass::operator()();
